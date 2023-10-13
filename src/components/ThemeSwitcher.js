@@ -1,9 +1,9 @@
 import "../styles/themeSwitcher.css";
 
-const ThemeSwitcher = ({changeTheme}) => {
+const ThemeSwitcher = ({changeTheme, theme}) => {
     return (
         <div className="toggleWrapper">
-            <input type="checkbox" className="dn" id="dn" onChange={changeTheme}/>
+            <input type="checkbox" className="dn" id="dn" onChange={changeTheme} checked={theme === "dark" ? true : false} />
             <label htmlFor="dn" className="toggle">
                 <span className="toggle__handler">
                     <span className="crater crater--1"></span>
