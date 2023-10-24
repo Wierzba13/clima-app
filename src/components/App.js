@@ -18,6 +18,7 @@ const App = () => {
     const [previousSearches, setpreviousSearches] = useState([]);
     const [cookies, setCookie] = useCookies([""]);
     const [data, setData] = useState({});
+    const [coords, setCoords] = useState({})
 
     useEffect(() => {
         !cookies.theme ? setCookie("theme", "light", { path: "/" }) : setTheme(cookies.theme);
@@ -72,7 +73,7 @@ const App = () => {
         setTheme(theme === "dark" ? "light" : "dark");
     }
 
-    const onSearchSubmit = (e) => {
+    const onSearchSubmit = async (e) => {
         e.preventDefault();
 
         const val = e.target.querySelector("#searchInput").value;
@@ -80,6 +81,38 @@ const App = () => {
         setpreviousSearches(prevArr => [val, ...prevArr.slice(0,4)]);
 
         e.target.querySelector("#searchInput").value = "";
+
+        options["params"] = {
+            q: `${val}`, 
+            lang: "pl"
+        };
+
+        try {
+            const response = await axios.request(options);
+
+            // https://www.weatherapi.com/docs/#apis-forecast
+            setData(data => ({
+                "country": response.data.location["country"],
+                "city": response.data.location["name"],
+                "icon": response.data.current.condition["icon"],
+                "msg": response.data.current.condition["text"],
+                "temp": response.data.current["temp_c"],
+                "cloud": response.data.current["cloud"],
+                "wind": response.data.current["wind_kph"],
+                "humidity": response.data.current["humidity"],
+                "precip": response.data.current["precip_mm"],
+                "pressure": response.data.current["pressure_mb"],
+                "visibility": response.data.current["vis_km"],
+                "lastUpdated": response.data.current["last_updated"]
+            }));
+
+            console.log(response.data);
+        } catch (error) {
+            setData({});
+            if(error.response.status === 400) {
+                alert("Wpisano błędną nazwę miasta");
+            }
+        }
     }
 
     return (
