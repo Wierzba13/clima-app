@@ -12,18 +12,27 @@ import themesTilesUrl from "../data/themesTiles";
 import ThemeSwitcher from "./ThemeSwitcher";
 import InfoBox from "./InforBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import getCoordinates from "../scripts/coordinates";
 
 const App = () => {
     const [theme, setTheme] = useState("light");
     const [previousSearches, setpreviousSearches] = useState([]);
     const [cookies, setCookie] = useCookies([""]);
     const [data, setData] = useState({});
-    const [coords, setCoords] = useState({})
+    const [coords, setCoords] = useState([52.60, 18.23]); // Default coords for Wejherowo city
 
     useEffect(() => {
         !cookies.theme ? setCookie("theme", "light", { path: "/" }) : setTheme(cookies.theme);
         
         !cookies.previousSearches ? setCookie("previousSearches", [], { path: "/" }) : setpreviousSearches(cookies.previousSearches);
+
+        getCoordinates((error, coordinates) => {
+            if (error) {
+                alert(error.message);
+            } else {
+                setCoords([coordinates.lat, coordinates.long]);
+            }
+        });
     }, []);
 
     useEffect(() => {
@@ -35,7 +44,7 @@ const App = () => {
     }, [previousSearches]);
 
     const HandleMapClick = () => {
-        useMapEvents({
+        const map = useMapEvents({
             click: async (e) => {
                 options["params"] = {
                     q: `${e.latlng["lat"]},${e.latlng["lng"]}`, 
@@ -60,13 +69,17 @@ const App = () => {
                         "visibility": response.data.current["vis_km"],
                         "lastUpdated": response.data.current["last_updated"]
                     }));
-
-                    console.log(response.data);
                 } catch (error) {
-                    console.error(error.message);
+                    alert(error.message);
                 }
             },
+            
         });
+
+        useEffect(() => {
+            // Setup map view for new coords
+            map.setView(coords, map.getZoom());
+        }, [coords, map]);
     };
 
     const changeTheme = () => {
@@ -105,8 +118,6 @@ const App = () => {
                 "visibility": response.data.current["vis_km"],
                 "lastUpdated": response.data.current["last_updated"]
             }));
-
-            console.log(response.data);
         } catch (error) {
             setData({});
             if(error.response.status === 400) {
@@ -119,7 +130,7 @@ const App = () => {
         <main className="App">
             <div className="leaflet-container">
                 
-                <MapContainer center={[54.60, 18.23]} minZoom={7} maxZoom={17} zoom={14} scrollWheelZoom={true} >
+                <MapContainer center={coords} minZoom={4} maxZoom={17} zoom={14} scrollWheelZoom={true} >
                     <TileLayer
                         url={
                             theme === "light" 
