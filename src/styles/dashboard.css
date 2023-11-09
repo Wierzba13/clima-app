@@ -5,6 +5,7 @@
     color: var(--text);
     overflow-y: scroll;
 }
+
 .heading-container {
     width: 100%;
     padding: 0.15em;
@@ -80,4 +81,21 @@
 }
 .search-container form button:hover svg {
     color: #01404D;
+}
+
+@media screen and (max-width: 1566px) {
+    .panel { 
+        width: 100vw;
+        overflow: visible;
+    }
+    .search-container {
+        margin: 0 auto;
+        width: 75%;
+    }
+}
+@media screen and (max-width: 1066px) {
+    .search-container {
+        margin: 0 auto;
+        width: 100%;
+    }
 }

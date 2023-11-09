@@ -4,11 +4,11 @@ main {
     display: flex;
     justify-content: center;
 }
-
 .leaflet-container {
     width: 75vw;
     height: 100%;
 }
+
 main[data-theme="dark"] {
     --bgc: #000;
     --text: #f5f5f5;
@@ -30,7 +30,7 @@ main[data-theme="light"] {
     right: 2em;
     background-color: var(--effects);
     border: 2px solid var(--effects);
-    border-radius: 5em;
+    border-radius: 7em;
     cursor: pointer;
     z-index: 1000;
 }
@@ -58,4 +58,23 @@ main[data-theme="light"] {
     line-height: 5em;
     font-size: 3.5em;
     color: var(--bgc);
+}
+
+@media screen and (max-width: 1566px) {
+    .leaflet-container {
+        width: 100vw;
+        height: 100vh;
+    }
+    main { 
+        flex-direction: column-reverse;
+        height: auto;
+    }
+    .recenter-button {
+        top: 2em;
+        width: 5em;
+        height: 5em;
+    }
+    .recenter-button svg {
+        font-size: 2.5em;
+    }
 }

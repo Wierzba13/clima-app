@@ -1,3 +1,5 @@
+// Milego dnia :D ~ Saszka
+
 // importing styles
 import "../styles/App.css";
 import "../styles/dashboard.css";
@@ -60,6 +62,17 @@ const App = () => {
         setCookie("previousSearches", previousSearches, { path: "/" });
     }, [previousSearches]);
 
+    const scrollToElement = (id) => {
+        const element = document.getElementById(id);
+    
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    }
+
     const HandleMapClick = () => {
         const map = useMapEvents({
             click: async (e) => {
@@ -87,6 +100,8 @@ const App = () => {
                             "visibility": response.data.current["vis_km"],
                             "lastUpdated": response.data.current["last_updated"]
                         }));
+
+                        if (window.innerWidth < 1566) scrollToElement("info-heading");
                     } catch (error) {
                         setAlertOptions({
                             show: true,
@@ -170,7 +185,7 @@ const App = () => {
     return (
         <main className="App" data-theme={theme === "dark" ? "dark" : "light"}>
             <div className="leaflet-container">
-                <MapContainer center={coords} minZoom={4} maxZoom={17} zoom={14} scrollWheelZoom={true} className="map-container">
+                <MapContainer center={coords} minZoom={4} maxZoom={17} zoom={14} scrollWheelZoom={false} className="map-container">
                     <TileLayer
                         url={
                             theme === "light" 
@@ -221,7 +236,7 @@ const App = () => {
                 </div>
 
                 <div className="information-container">
-                    <h2>{data["country"] != null ? `Pogoda dla: ${data["country"]}/${data["city"]}` : "Nie wybrano miejsca"}</h2>
+                    <h2 id="info-heading">{data["country"] != null ? `Pogoda dla: ${data["country"]}/${data["city"]}` : "Nie wybrano miejsca"}</h2>
                 
                     {
                         data["icon"] != null ?
