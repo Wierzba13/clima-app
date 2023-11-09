@@ -3,6 +3,7 @@
     padding: 1em 1.5em;
     background-color: var(--bgc);
     color: var(--text);
+    overflow-y: scroll;
 }
 .heading-container {
     width: 100%;

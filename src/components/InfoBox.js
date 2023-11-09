@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/InfoBox.css";
 
-const InforBox = ({text, icon}) => {
+const InfoBox = ({text, icon}) => {
     return (
         <div className="infoBox">
             <FontAwesomeIcon icon={icon}/>
@@ -12,4 +12,4 @@ const InforBox = ({text, icon}) => {
     );
 }
 
-export default InforBox;
+export default InfoBox;
