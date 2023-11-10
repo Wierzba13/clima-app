@@ -8,7 +8,7 @@ Dzięki klima wyzbedziesz sie codziennych niespodzianek pogodowych - zawsze będ
 
 * [Raul Wierzbiński](https://github.com/Wierzba13) ~ praca z API, logika aplikacji
 * Michał Ruc ~ prace nad wyglądem strony - projekt graficzny, paleta kolorów, style
-* Nikodem Królczuk ~ wygląd strony, responsywność, grafika
+* Nikodem Królczyk ~ wygląd strony, responsywność, grafika
 
 ## Podziękowania
 
