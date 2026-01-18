@@ -1,0 +1,101 @@
+.panel {
+    width: 25vw;
+    padding: 1em 1.5em;
+    background-color: var(--bgc);
+    color: var(--text);
+    overflow-y: scroll;
+}
+
+.heading-container {
+    width: 100%;
+    padding: 0.15em;
+    margin-bottom: 3em;
+}
+.heading-container .logo-heading {
+    text-align: center;
+    font-size: 6em;
+    color: var(--effects);
+}
+.information-container {
+    margin: 2em auto;
+    text-align: center;
+}
+.information-shortcut {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1em 0;
+    border-collapse: collapse;
+}
+.dashboard-footer p {
+    margin: 1.2em auto;
+}
+.search-container form {
+    --formEffect: var(-effects);
+
+    position: relative;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--effects);
+    border-radius: 84px;
+    padding: .3em;
+}
+.search-container form input, 
+.search-container form button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    transition: .3s;
+}
+.search-container form button svg {
+    transition: .3s;
+}
+.search-container form input {
+    width: 100%;
+    height: 100%;
+    padding: 0 .6em;
+    color: var(--text);
+}
+.search-container form button {
+    height: 100%;
+    font-size: .6em;
+    padding: 0 .6em;
+    color: var(--effects);
+    border-left: 1px solid currentColor;
+    cursor: pointer;
+}
+.search-container form:has(input:focus),
+.search-container form:has(input:focus) button {
+    border-color: #01404D;
+}
+.search-container form:has(input:focus) button svg {
+    color: #01404D;
+}
+.search-container form button:hover svg {
+    color: #01404D;
+}
+
+@media screen and (max-width: 1566px) {
+    .panel { 
+        width: 100vw;
+        overflow: visible;
+    }
+    .search-container {
+        margin: 0 auto;
+        width: 75%;
+    }
+}
+@media screen and (max-width: 1066px) {
+    .search-container {
+        margin: 0 auto;
+        width: 100%;
+    }
+}

@@ -1,0 +1,80 @@
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.leaflet-container {
+    width: 75vw;
+    height: 100%;
+}
+
+main[data-theme="dark"] {
+    --bgc: #000;
+    --text: #f5f5f5;
+    --effects: #2dd27c;
+}
+main[data-theme="light"] {
+    --bgc: #f5f5f5;
+    --text: #000;
+    --effects: #0064ff;
+}
+/*  */
+.map-container { position: relative; }
+.recenter-button {
+    width: 7em;
+    height: 7em;
+    text-align: center;
+    position: absolute;
+    bottom: 3em;
+    right: 2em;
+    background-color: var(--effects);
+    border: 2px solid var(--effects);
+    border-radius: 7em;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.recenter-button:hover {
+    animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.25);
+    }
+    100% {
+      transform: scale(1);
+    }
+  
+}
+
+.recenter-button svg {
+    width: 100%;
+    text-align: center;
+    line-height: 5em;
+    font-size: 3.5em;
+    color: var(--bgc);
+}
+
+@media screen and (max-width: 1566px) {
+    .leaflet-container {
+        width: 100vw;
+        height: 100vh;
+    }
+    main { 
+        flex-direction: column-reverse;
+        height: auto;
+    }
+    .recenter-button {
+        top: 2em;
+        width: 5em;
+        height: 5em;
+    }
+    .recenter-button svg {
+        font-size: 2.5em;
+    }
+}

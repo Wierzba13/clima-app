@@ -1,0 +1,16 @@
+div.infoBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.45em;
+    border: 1px solid var(--effects);
+}
+svg {
+    padding-right: 0.3em;
+    font-size: 2.3em;
+    color: var(--effects);
+}
+p {
+    font-size: 1.1em;
+    margin: 0;
+}
